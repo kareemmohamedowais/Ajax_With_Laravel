@@ -58,10 +58,7 @@
             <div class="mb-3">
                 <label for="city" class="form-label">City</label>
                 <select name="city_id" class="form-select" id="city">
-                    <option selected>Select City</option>
-                    @foreach ($cities as $city)
-                    <option value="{{ $city->id }}">{{ $city->name }}</option>
-                    @endforeach
+                    <option selected>Select gov first</option>
                 </select>
                 <small id="city_idError" class="text-danger"></small>
             </div>
@@ -154,6 +151,36 @@
             });
         })
     </script> --}}
+
+    {{-- select cities based on governorate --}}
+    <script>
+        $(document).on('change', '#governorate', function(e) {
+            e.preventDefault();
+            var governorate_id = $(this).val();
+            $.ajax({
+                url:"{{ route('users.getCities') }}",
+                type:"POST",
+                data:{
+                    '_token':'{{ csrf_token() }}',
+                    'governorate_id':governorate_id,
+                },
+                success:function(data){
+
+                    $('#city').empty();
+                    $('#city').append('<option selected>Select city</option>');
+                    $.each(data,function(key,value){
+                        $('#city').append('<option value="'+value.id+'">'+value.name+'</option>');
+                    });
+
+
+
+                },
+                error:function(data){
+
+                }
+            });
+        })
+    </script>
 
 
 </body>
