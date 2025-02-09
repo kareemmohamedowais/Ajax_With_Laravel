@@ -22,6 +22,7 @@ Route::prefix('users')->controller(Usercontroller::class)->group(function(){
     Route::get('/','index')->name('users.index');
     Route::get('/create','create')->name('users.create');
     Route::post('/store','store')->name('users.store');
+    Route::post('/delete','delete')->name('users.delete');
 
     Route::post('get-cities','getCities')->name('users.getCities');
 });

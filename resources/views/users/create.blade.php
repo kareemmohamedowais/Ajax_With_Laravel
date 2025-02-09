@@ -86,7 +86,7 @@
                     $('#passwordError').html('').hide();
                     $('#gov_idError').html('').hide();
                     $('#city_idError').html('').hide();
-                    
+
             var formData = new FormData($('#formUser')[0]);
             $.ajax({
                 url:"{{ route('users.store') }}",
@@ -176,7 +176,7 @@
                 success:function(data){
 
                     $('#city').empty();
-                    $('#city').append('<option selected>Select city</option>');
+                    $('#city').append('<option selected disabled>Select city</option>');
                     $.each(data,function(key,value){
                         $('#city').append('<option value="'+value.id+'">'+value.name+'</option>');
                     });

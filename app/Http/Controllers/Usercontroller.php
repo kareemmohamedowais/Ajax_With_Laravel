@@ -56,7 +56,16 @@ class Usercontroller extends Controller
         $cities = city::where('gov_id',$request->governorate_id)->get(['id', 'name']);
         return response()->json($cities);
 
+    }
 
+    public function delete(Request $request){
+        $user = User::findOrFail($request->user_id);
+        $user->delete();
+        return response()->json([
+            'ststus'=>true,
+            'msg'=>'user deleted successfully',
+            // 'user_id'=>$request->user_id,
+        ]);
     }
 
 
