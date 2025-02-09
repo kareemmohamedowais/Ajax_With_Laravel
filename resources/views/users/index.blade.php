@@ -18,6 +18,7 @@
                     <th>Email</th>
                     <th>Governorate</th>
                     <th>City</th>
+                    <th>actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,8 +27,11 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>{{ $user->governorate }}</td>
-                        <td>{{ $user->city }}</td>
+                        <td>{{ $user->governorate->name }}</td>
+                        <td>{{ $user->city->name }}</td>
+                        <td>
+                            <button class="btn btn-danger">delete</button>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>

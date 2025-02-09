@@ -38,4 +38,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function governorate(){
+        return $this->belongsTo(governorate::class,'gov_id');
+    }
+    public function city(){
+        return $this->belongsTo(city::class);
+    }
 }
