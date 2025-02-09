@@ -77,15 +77,6 @@
         $(document).on('click', '#submitForm', function(e) {
             e.preventDefault();
 
-
-            var formData = new FormData($('#formUser')[0]);
-            $.ajax({
-                url:"{{ route('users.store') }}",
-                type:"POST",
-                data:formData,
-                processData:false,
-                contentType:false,
-                success:function(data){
                     // remove validation errors at submit form-control
                     $('#alertError').remove(); // way 1
                     // $('#alertError').empty().hide(); // way 2
@@ -95,6 +86,24 @@
                     $('#passwordError').html('').hide();
                     $('#gov_idError').html('').hide();
                     $('#city_idError').html('').hide();
+                    
+            var formData = new FormData($('#formUser')[0]);
+            $.ajax({
+                url:"{{ route('users.store') }}",
+                type:"POST",
+                data:formData,
+                processData:false,
+                contentType:false,
+                success:function(data){
+                    // // remove validation errors at submit form-control
+                    // $('#alertError').remove(); // way 1
+                    // // $('#alertError').empty().hide(); // way 2
+                    // // $('#alertError').html('').hide(); // way 3
+                    // $('#nameError').html('').hide();
+                    // $('#emailError').html('').hide();
+                    // $('#passwordError').html('').hide();
+                    // $('#gov_idError').html('').hide();
+                    // $('#city_idError').html('').hide();
 
                     // to remove data after adding
                     $('#formUser')[0].reset();
