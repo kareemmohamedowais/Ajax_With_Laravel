@@ -110,6 +110,29 @@
                 }
             });
             },1000);
+        });
+
+        // search ajaxPagination
+
+        $(document).on('click', '#ajaxPaginationSearch a', function(e) {
+            e.preventDefault();
+            var searchAjaxValue = $('#searchAjax').val();
+            var link = $(this).attr('href');
+                $.ajax({
+                url:link,
+                type:"POST",
+                dataType:'html',
+                data:{
+                    '_token':'{{ csrf_token() }}',
+                    'searchAjaxValue':searchAjaxValue,
+                },
+                success:function(data){
+                    $('.ajaxTable').html(data);
+                },
+                error:function(data){
+                    alert('error');
+                }
+            });
 
 
         });

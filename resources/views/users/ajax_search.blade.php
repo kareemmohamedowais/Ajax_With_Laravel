@@ -25,3 +25,7 @@
         @endforeach
     </tbody>
 </table>
+
+<div id="ajaxPaginationSearch">
+    {{ $users->links() }}
+</div>

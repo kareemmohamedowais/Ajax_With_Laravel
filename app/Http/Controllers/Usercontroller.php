@@ -62,7 +62,7 @@ class Usercontroller extends Controller
             $query->whereRelation('governorate','name','LIKE','%'.$request->searchAjaxValue.'%');
             $query->orWhereRelation('city','name','LIKE','%'.$request->searchAjaxValue.'%');
         })
-        ->get();
+        ->paginate(1);
 
         return view('users.ajax_search',['users'=>$users]);
 
