@@ -16,7 +16,6 @@
 
         {{-- alertError div --}}
         <div id="alertError" class="alert alert-danger" style="display: none;" >
-
         </div>
         <form id="formUser" >
             @csrf

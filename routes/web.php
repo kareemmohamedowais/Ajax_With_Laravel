@@ -24,6 +24,9 @@ Route::prefix('users')->controller(Usercontroller::class)->group(function(){
     Route::post('/store','store')->name('users.store');
     Route::post('/delete','delete')->name('users.delete');
 
+    Route::get('/edit/{id}','edit')->name('users.edit');
+    Route::post('/update','update')->name('users.update');
+
     Route::post('get-cities','getCities')->name('users.getCities');
 });
 

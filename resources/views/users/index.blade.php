@@ -34,6 +34,7 @@
                         <td>{{ $user->city->name }}</td>
                         <td>
                             <button id="delete_btn" user_id="{{ $user->id }}" class="btn btn-danger">delete</button>
+                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">edit</a>
                         </td>
                     </tr>
                 @endforeach

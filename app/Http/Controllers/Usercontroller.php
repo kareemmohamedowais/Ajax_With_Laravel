@@ -20,6 +20,21 @@ class Usercontroller extends Controller
         $cities = city::all();
         return view('users.create',compact('govs','cities'));
     }
+    public function edit($id){
+        $user = User::findOrFail($id);
+        $govs = governorate::all();
+        $cities = city::all();
+        return view('users.edit',compact('user','govs','cities'));
+    }
+
+    public function update(Request $request){
+        $user = User::findOrFail($request->id);
+        $user->update($request->except(['id','_token']));
+        return response()->json([
+            'status'=>200,
+            'msg'=>'user updated successfully',
+        ]);
+    }
 
     public function store(Request $request){
 
