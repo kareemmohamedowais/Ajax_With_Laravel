@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="ajax_pagination">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,6 +46,9 @@
             @endforeach
         </tbody>
     </table>
+    <div id="ajaxPagination">
+        {{ $users->links() }}
+    </div>
 </div>
     </div>
 
@@ -54,7 +57,32 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-{{-- search ajax --}}
+{{-- ajaxPagination --}}
+
+<script>
+    $(document).on('click', '#ajaxPagination a', function(e) {
+        e.preventDefault();
+
+        var link = $(this).attr('href');
+
+        $.ajax({
+            url:link,
+            type:"GET",
+            dataType:'html',
+
+            success:function(data){
+                $('#ajax_pagination').html(data);
+            },
+            error:function(data){
+                // alert(data);
+            }
+        })
+    })
+</script>
+
+
+
+    {{-- search ajax --}}
     <script>
 
         // search ajax
