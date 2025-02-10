@@ -27,6 +27,11 @@ Route::prefix('users')->controller(Usercontroller::class)->group(function(){
     Route::get('/edit/{id}','edit')->name('users.edit');
     Route::post('/update','update')->name('users.update');
 
+
+    // search ajax
+    Route::post('/searchAjax','searchAjax')->name('users.searchAjax');
+
     Route::post('get-cities','getCities')->name('users.getCities');
+    
 });
 

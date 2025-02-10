@@ -9,37 +9,44 @@
 </head>
 <body>
     <div class="container mt-5">
+
+        <input type="search" id="searchAjax" name="searchAjax" class="form-control" placeholder="Search here ........">
+
+        <br>
+
         <h2>User Data</h2>
         <div id="alertSuccess" class="alert alert-success" style="display: none;">
 
         </div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Governorate</th>
-                    <th>City</th>
-                    <th>actions</th>
+<div class="ajaxTable">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Governorate</th>
+                <th>City</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($users as $user)
+                <tr class="userRow{{ $user->id }}">
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>{{ $user->governorate->name }}</td>
+                    <td>{{ $user->city->name }}</td>
+                    <td>
+                        <button id="delete_btn" user_id="{{ $user->id }}" class="btn btn-danger">delete</button>
+                        <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">edit</a>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach($users as $user)
-                    <tr class="userRow{{ $user->id }}">
-                        <td>{{ $user->id }}</td>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->governorate->name }}</td>
-                        <td>{{ $user->city->name }}</td>
-                        <td>
-                            <button id="delete_btn" user_id="{{ $user->id }}" class="btn btn-danger">delete</button>
-                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">edit</a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+            @endforeach
+        </tbody>
+    </table>
+</div>
     </div>
 
     <!-- Bootstrap JS and dependencies -->
@@ -47,7 +54,39 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+{{-- search ajax --}}
+    <script>
 
+        // search ajax
+
+        let debounce;
+
+        $(document).on('input', '#searchAjax', function(e) {
+            e.preventDefault();
+            var searchAjaxValue = $(this).val();
+            clearTimeout(debounce);
+            debounce = setTimeout(()=>{
+                $.ajax({
+                url:"{{ route('users.searchAjax') }}",
+                type:"POST",
+                dataType:'html',
+                data:{
+                    '_token':'{{ csrf_token() }}',
+                    'searchAjaxValue':searchAjaxValue,
+                },
+                success:function(data){
+                    $('.ajaxTable').html(data);
+                },
+                error:function(data){
+                    alert('error');
+                }
+            });
+            },1000);
+
+
+        });
+    </script>
+{{-- delete --}}
     <script>
         $(document).on('click', '#delete_btn', function(e) {
             e.preventDefault();

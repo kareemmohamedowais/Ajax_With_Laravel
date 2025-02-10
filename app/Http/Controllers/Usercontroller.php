@@ -55,6 +55,18 @@ class Usercontroller extends Controller
             ]);
         }
     }
+    public function searchAjax(Request $request){
+        $users = User::where('name','LIKE','%'.$request->searchAjaxValue.'%')
+        ->orWhere('email','LIKE','%'.$request->searchAjaxValue.'%')
+        ->orWhere(function($query)use($request){
+            $query->whereRelation('governorate','name','LIKE','%'.$request->searchAjaxValue.'%');
+            $query->orWhereRelation('city','name','LIKE','%'.$request->searchAjaxValue.'%');
+        })
+        ->get();
+
+        return view('users.ajax_search',['users'=>$users]);
+
+    }
 
     private function filterUser(){
         return [
