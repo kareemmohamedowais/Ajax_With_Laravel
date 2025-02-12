@@ -48,6 +48,15 @@ class Usercontroller extends Controller
             'gov_id' => $request->gov_id,
             'city_id' => $request->city_id,
         ]);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = $file->getClientOriginalName().time();
+
+            $path = $file->storeAs('users',$fileName,['disk'=>'public']);
+            $user->update([
+                'image'=>$path,
+            ]);
+        }
         if($user){
             return response()->json([
                 'status' => 200,

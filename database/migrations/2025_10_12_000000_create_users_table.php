@@ -21,6 +21,9 @@ return new class extends Migration
             $table->foreignId('gov_id')->constrained('governorates','id');
             $table->foreignId('city_id')->constrained('cities','id');
 
+
+            $table->string('image')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

@@ -17,7 +17,7 @@
         {{-- alertError div --}}
         <div id="alertError" class="alert alert-danger" style="display: none;" >
         </div>
-        <form id="formUser" >
+        <form id="formUser" enctype="multipart/form-data" >
             @csrf
             <!-- Name Input -->
             <div class="mb-3">
@@ -38,6 +38,12 @@
                 <label for="password" class="form-label">Password</label>
                 <input name="password" type="password" class="form-control" id="password" placeholder="Enter your password">
                 <small id="passwordError" class="text-danger"></small>
+            </div>
+            <!-- image Input -->
+            <div class="mb-3">
+                <label for="image" class="form-label">image</label>
+                <input name="image" type="file" class="form-control" id="image" placeholder="Enter your image">
+                <small id="imageError" class="text-danger"></small>
             </div>
 
             <!-- Governorate Select Box -->
@@ -93,6 +99,7 @@
                 data:formData,
                 processData:false,
                 contentType:false,
+                enctype:"multipart/form-data",
                 success:function(data){
                     // // remove validation errors at submit form-control
                     // $('#alertError').remove(); // way 1
