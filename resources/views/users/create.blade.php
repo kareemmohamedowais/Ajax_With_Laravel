@@ -45,6 +45,9 @@
                 <input name="image" type="file" class="form-control" id="image" placeholder="Enter your image">
                 <small id="imageError" class="text-danger"></small>
             </div>
+            <div class="mb-3">
+                <img src="" alt="" id="img_preview" width="200px">
+            </div>
 
             <!-- Governorate Select Box -->
             <div class="mb-3">
@@ -78,6 +81,24 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
+
+    {{-- preview img by jquery --}}
+<script>
+    $(document).on('change','#image',function(e){
+        e.preventDefault()
+        file = this.files[0];
+        if (file) {
+            render = new FileReader();
+            render.onload = function(e) {
+                $('#img_preview').attr('src', e.target.result);
+            }
+            render.readAsDataURL(file);
+        }
+    });
+</script>
+
+
+    {{-- create --}}
     <script>
         $(document).on('click', '#submitForm', function(e) {
             e.preventDefault();
