@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
+    {{-- preview img by Dropify --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -42,7 +44,8 @@
             <!-- image Input -->
             <div class="mb-3">
                 <label for="image" class="form-label">image</label>
-                <input name="image" type="file" class="form-control" id="image" placeholder="Enter your image">
+                <input name="image" type="file" class="form-control dropify"
+                data-allowed-formats="portrait square" data-height="300" id="image" placeholder="Enter your image">
                 <small id="imageError" class="text-danger"></small>
             </div>
             <div class="mb-3">
@@ -80,6 +83,23 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+
+    {{-- preview img by Dropify js and must be used jquery --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js" integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $('.dropify').dropify({
+    messages: {
+        'default': 'ارمي الملف هنا',
+        'replace': 'لو عايز تبدل الملف دوس هنا ',
+        'remove':  'Remove',
+        'error':   'Ooops, something wrong happended.'
+    },
+    
+});
+    </script>
+
 
 
     {{-- preview img by jquery --}}
